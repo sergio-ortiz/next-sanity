@@ -4,8 +4,8 @@ const Layout = ({ children, pages }) => (
   <>
     <ul>
       {pages.map((page) => (
-        <li>
-          <Link href={page.slug ? page.slug : "/"}>
+        <li key={page._id}>
+          <Link href={page.slug ? "/" + page.slug : "/"}>
             <a>{page.title}</a>
           </Link>
         </li>
