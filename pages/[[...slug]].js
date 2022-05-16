@@ -1,3 +1,4 @@
+import Layout from "../components/template";
 import { createClient } from "next-sanity";
 
 const client = createClient({
@@ -26,10 +27,10 @@ export async function getStaticProps({ params }) {
   const pages = await client.fetch(`*[_type == "page"]`);
   const data = pages.find((page) => page.slug == params.slug);
   return {
-    props: { data },
+    props: { data, pages },
   };
 }
 
-const Page = ({ data }) => <h1>{data.title}</h1>;
+const Page = ({ data, pages }) => <Layout pages={pages}>{data.title}</Layout>;
 
 export default Page;
