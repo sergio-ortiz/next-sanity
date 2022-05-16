@@ -1,4 +1,4 @@
-import Layout from "../components/template";
+import Layout from "../components/layout";
 import { createClient } from "next-sanity";
 
 const client = createClient({
