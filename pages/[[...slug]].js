@@ -11,16 +11,20 @@ export async function getStaticPaths() {
   const pages = await client.fetch(`*[_type == "page"]`);
 
   return {
-    paths: pages.map((p) => ({
-      params: { page: p.endpoint },
-    })),
+    paths: pages.map((page) =>
+      page.slug
+        ? {
+            params: { slug: [page.slug] },
+          }
+        : { params: { slug: [] } }
+    ),
     fallback: false,
   };
 }
 
 export async function getStaticProps({ params }) {
   const pages = await client.fetch(`*[_type == "page"]`);
-  const data = pages.find((p) => p.endpoint == params.page);
+  const data = pages.find((page) => page.slug == params.slug);
   return {
     props: { data },
   };
